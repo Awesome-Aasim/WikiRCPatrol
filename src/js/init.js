@@ -30,17 +30,16 @@ if (!rcpatrol) { // stops multiple instances of RC patrol from running
                 })
             }
             $("#mw-content-text").html("");
-            $("#mw-content-text").append('<div class="rcpatrolbuttons"></div>');
+            $("#mw-content-text").append('<div id="rcpatrolbuttons"></div>');
             $("#mw-content-text").append('<div id="rcpatroldiff"></div>');
-            $("#mw-content-text").append('<div class="rcpatrolbuttons"></div>');
-            $(".rcpatrolbuttons").prepend(rcpatrol.rcpatrolbar.$element);
-            $(".rcpatrolbuttons").prepend(rcpatrol.rollbackbar.$element);
-            $(".rcpatrolbuttons").prepend(rcpatrol.dropdownmenu.$element);
-            $(".rcpatrolbuttons").prepend('<a href="/wiki/Special:BlankPage/RCPatrol?oresreview=1">Only show edits that likely need review</a><br>');
+            $("#rcpatrolbuttons").prepend(rcpatrol.rcpatrolbar.$element);
+            $("#rcpatrolbuttons").prepend(rcpatrol.rollbackbar.$element);
+            $("#rcpatrolbuttons").prepend(rcpatrol.dropdownmenu.$element);
+            $("#rcpatrolbuttons").prepend('<a href="/wiki/Special:BlankPage/RCPatrol?oresreview=1">Only show edits that likely need review</a><br>');
             if (mw.config.get('wgUserGroups').includes('sysop')) {
-                $(".rcpatrolbuttons").append('Admin tools: <span id="rcpatroladmintools"></span>');
+                $("#rcpatrolbuttons").append('Admin tools: <span id="rcpatroladmintools"></span>');
             }
-            $(".rcpatrolbuttons").append('Page tools: <span id="rcpatrolpagetools"></span>');
+            $("#rcpatrolbuttons").append('Page tools: <span id="rcpatrolpagetools"></span>');
             $("#rcpatroldiff").css({
                 overflow: "auto"
             });
