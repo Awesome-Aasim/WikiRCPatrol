@@ -1,5 +1,5 @@
 <?php
-// Based on the WikiRCPatrol Lite build script, Apache 2.0 (c) WikiRCPatrol Contributors https://gitlab.com/WikiRCPatrol/WikiRCPatrol-web/-/blob/master/build.php
+// Based on the RedWarn build script, Apache 2.0 (c) WikiRCPatrol Contributors https://gitlab.com/RedWarn/RedWarn-web/-/blob/master/build.php
 // USAGE: Run this in the terminal, or grab it as a web request.
 //
 // To output the built script into a file, run the follwing:
@@ -13,7 +13,16 @@ $jsRoot = __DIR__ . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . "js";
 
 // Add your files, in order of how they'll be joined in the array below
 $jsFiles = [
-    'init.js'
+    'init.js',
+    'i18n.js',
+    'enwikiconfig.js',
+    'ui.js',
+    'fetchandloaddiff.js',
+    'revert.js',
+    'warn.js',
+    'report.js',
+    'eventHandler.js',
+    'keyCombinations.js'
 ];
 
 $htmlRoot = __DIR__ . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . "html";
@@ -41,7 +50,7 @@ MIT Licensed - see https://github.com/Awesome-Aasim/WikiRCPatrol/blob/master/LIC
  **/
 function getNotice() {
 ?>
-If you wish to customise WikiRCPatrol, submit a request on the talk page or download source.
+
 <?php
 }
 
