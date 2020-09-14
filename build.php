@@ -41,7 +41,27 @@ $magicWords = [
  **/
 function getCredits() {
 ?>
-MIT Licensed - see https://github.com/Awesome-Aasim/WikiRCPatrol/blob/master/LICENSE
+* MIT Licensed - see https://github.com/Awesome-Aasim/WikiRCPatrol/blob/master/LICENSE
+* 
+* Copyright (c) 2020 Awesome Aasim and contributors
+* 
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+* 
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
 <?php
 }
 
@@ -50,7 +70,10 @@ MIT Licensed - see https://github.com/Awesome-Aasim/WikiRCPatrol/blob/master/LIC
  **/
 function getNotice() {
 ?>
-
+* This script is a work in progress.  Your help in developing this tool is welcomed at https://github.com/Awesome-Aasim/WikiRCPatrol.
+* Contributions and changes to this script should be made at the GitHub repository above.
+* All other changes will be lost if this file is rebuilt and saved.
+* By contributing to this project, you agree to release your work under the MIT license.
 <?php
 }
 
@@ -139,21 +162,15 @@ function getJSSources() {
  * Outputs everything.
  */
 function buildScript() {?>
-/*
+/**
 <?php getCredits(); ?>
 
 <?php getNotice(); ?>
-*/
+**/
 // <nowiki>
+
+mw.loader.using( ['oojs-ui-core', 'oojs-ui.styles.icons-editing-core', 'oojs-ui.styles.icons-movement', 'oojs-ui.styles.icons-interactions', 'oojs-ui.styles.icons-layout', 'oojs-ui.styles.icons-alerts'], function () {
 <?php getJSSources(); ?>
-$( document ).ready( function () {
-	// Initialize WikiRCPatrol once the page is loaded.
-	try {
-		initRW();
-	} catch (err) {
-		mw.notify("Sorry, an error occured while loading WikiRCPatrol.");
-		console.error(err);
-	}
 });
 // </nowiki>
 <?php
