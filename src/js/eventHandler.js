@@ -76,7 +76,7 @@ rcpatrol.dropdownmenu.getMenu().on('select', function () {
     for (var option of rcpatrol.dropdown) {
         if (option.val == val) {
             rcpatrol.rcpatrolbox.setValue(option.summary);
-            rcpatrol.revert(function () {
+            rcpatrol.revert(rcpatrol.changes[rcpatrol.currentChange].title, rcpatrol.changes[rcpatrol.currentChange].user, function () {
                 rcpatrol.warn(rcpatrol.changes[rcpatrol.currentChange].user, option.template, rcpatrol.changes[rcpatrol.currentChange].title);
                 rcpatrol.currentChange++;
                 rcpatrol.loadChange(rcpatrol.changes[rcpatrol.currentChange]);
