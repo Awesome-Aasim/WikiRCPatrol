@@ -32,6 +32,7 @@ if (!rcpatrol) { // stops multiple instances of RC patrol from running
             $("#mw-content-text").html("");
             $("#mw-content-text").append('<div class="rcpatrolbuttons"></div>');
             $("#mw-content-text").append('<div id="rcpatroldiff"></div>');
+            $("#mw-content-text").append('<div class="rcpatrolbuttons"></div>');
             $(".rcpatrolbuttons").prepend(rcpatrol.rcpatrolbar.$element);
             $(".rcpatrolbuttons").prepend(rcpatrol.rollbackbar.$element);
             $(".rcpatrolbuttons").prepend(rcpatrol.dropdownmenu.$element);
