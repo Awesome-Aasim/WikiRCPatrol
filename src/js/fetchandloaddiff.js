@@ -73,7 +73,7 @@ rcpatrol.loadChange = function (change) {
             var scriptpath = mw.config.get('wgScriptPath');
             var loadurl = mw.config.get("wgScriptPath") + "/index.php?useskin=fallback&safemode=1&oldid=" + oldid + (change.revid ? "&diff=" + change.revid : "") + "&uselang=" + mw.config.get("wgUserLanguage");
             if (location.href.split(".").includes("m")) {
-                loadurl = mw.config.get("wgArticlePath").replace("$1", "Special:MobileDiff/" + (change.revid ? change.revid : oldid)) + "?useskin=fallback&safemode=1&uselang=" + mw.config.get("wgUserLanguage");
+                loadurl = mw.config.get("wgArticlePath").replace("$1", "Special:MobileDiff/" + (change.revid ? change.revid : "") + "..." + oldid) + "?useskin=fallback&safemode=1&uselang=" + mw.config.get("wgUserLanguage");
             }
             $("#rcpatroldiff").load(loadurl, function (response, status, xhr) {
                 if (status == "error") {
