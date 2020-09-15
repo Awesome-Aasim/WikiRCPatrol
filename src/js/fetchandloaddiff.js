@@ -78,7 +78,8 @@ rcpatrol.loadChange = function (change) {
             $.get(loadurl, {
                 safemode: "1",
                 uselang: mw.config.get("wgUserLanguage"),
-                useskin: mw.config.get("skin")
+                useskin: mw.config.get("skin"),
+                useskinversion: "2"
             }).done(function(result) {
                 var contenttextlocation;
                 switch (mw.config.get("skin")) {
