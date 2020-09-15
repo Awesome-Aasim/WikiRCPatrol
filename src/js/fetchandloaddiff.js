@@ -85,7 +85,7 @@ rcpatrol.loadChange = function (change) {
                 switch (mw.config.get("skin")) {
                     case "timeless": contenttextlocation = '#mw-wrapper';
                     break;
-                    case "vector": contenttextlocation = "#content, #mw-page-container";
+                    case "vector": contenttextlocation = "#content, .mw-page-container";
                     break;
                     case "monobook": contenttextlocation = "#globalWrapper";
                     break;
