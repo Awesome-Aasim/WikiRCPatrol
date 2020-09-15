@@ -4,6 +4,13 @@ if (!rcpatrol) { // stops multiple instances of RC patrol from running
         /**
          * Initialize variables related to RC patrol
          */
+        if (mw.config.get("skin") == "vector" && !(new URL(location.href)).searchParams.get("useskinversion")) {
+            window.location.replace((function() {
+                var url = (new URL(location.href));
+                url.searchParams.set("useskinversion", "2");
+                return url;
+            })());
+        }
         var rcpatrol = {};
         rcpatrol.changes = [];
         rcpatrol.currentChange = 0;
