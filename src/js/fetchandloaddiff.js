@@ -71,41 +71,67 @@ rcpatrol.loadChange = function (change) {
             }
             console.log(mw.config.get("wgScriptPath") + "/index.php?oldid=" + oldid + "&diff=" + change.revid);
             var scriptpath = mw.config.get('wgScriptPath');
-            var loadurl = mw.config.get("wgScriptPath") + "/index.php?useskin=fallback&safemode=1&oldid=" + oldid + (change.revid ? "&diff=" + change.revid : "") + "&uselang=" + mw.config.get("wgUserLanguage");
+            var loadurl = mw.config.get("wgScriptPath") + "/index.php?oldid=" + oldid + (change.revid ? "&diff=" + change.revid : "");
             if (location.href.split(".").includes("m")) {
-                loadurl = mw.config.get("wgArticlePath").replace("$1", "Special:MobileDiff/" + oldid + (change.revid ? "..." + change.revid : "")) + "?useskin=fallback&safemode=1&uselang=" + mw.config.get("wgUserLanguage");
+                loadurl = mw.config.get("wgArticlePath").replace("$1", "Special:MobileDiff/" + oldid + (change.revid ? "..." + change.revid : ""));
             }
+            $.get(loadurl, {
+                safemode: "1",
+                uselang: mw.config.get("wgUserLanguage"),
+                useskin: mw.config.get("skin")
+            }).done(function(result) {
+                var contenttextlocation;
+                switch (mw.config.get("skin")) {
+                    case "timeless": contenttextlocation = '#mw-wrapper';
+                    break;
+                    case "vector": contenttextlocation = "#content, #mw-page-container";
+                    break;
+                    case "monobook": contenttextlocation = "#globalWrapper";
+                    break;
+                    case "minerva": contenttextlocation = "#mw-mf-viewport"
+                    break;
+                    case "modern": contenttextlocation = "#mw_main";
+                    break;
+                }
+                var $r = $(result);  
+                $("#rcpatroldiff").html($r);
+                $("#rcpatroldiff").find(contenttextlocation).html($("#rcpatroldiff").find("#mw-content-text").html());
+                
+                $("#firstHeading, #section_0").html('Recent Changes Patrol \"<a target=\"_blank\" href=\"' + scriptpath + '/index.php?title=' + change.title + '\">' + change.title + "</a>\"");
+                $("title").text("Recent Changes Patrol \"" + change.title + "\" - " + mw.config.get("wgSiteName"));
+
+                $("#rcpatroldiff").fadeIn();
+                $("#rcpatroladmintools").fadeIn();
+                $("#rcpatrolpagetools").fadeIn();
+                rcpatrol.rcpatrolbox.setValue("");
+                rcpatrol.rcpatrolbutton.setLabel("Rollback");
+                rcpatrol.setDisabled(false);
+                $("#rcpatroladmintools").html('');
+                $("#rcpatroladmintools").append('<a target="_blank" href="' + scriptpath + '/index.php?title=' + change.title + '&action=delete">Delete</a>');
+                $("#rcpatroladmintools").append(' &bull; ');
+                $("#rcpatroladmintools").append('<a target="_blank" href="' + scriptpath + '/index.php?title=' + change.title + '&action=protect">Protect</a>');
+                $("#rcpatroladmintools").append(' &bull; ');
+                $("#rcpatroladmintools").append('<a target="_blank" href="' + scriptpath + '/index.php?title=Special:Block/' + change.user + '">Block poster</a>');
+                $("#rcpatrolpagetools").html('');
+                $("#rcpatrolpagetools").append('<a target="_blank" href="' + scriptpath + '/index.php?title=' + change.title + '&action=history">View page history</a>');
+                $("#rcpatrolpagetools").append(' &bull; ');
+                $("#rcpatrolpagetools").append('<a target="_blank" href="' + scriptpath + '/index.php?oldid=' + oldid + '&diff=' + change.revid + '">View diff</a>');
+            }).fail(function() {
+                $("#rcpatroldiff").fadeIn(1000);
+                $("#rcpatroldiff").text("Could not load diff.  Please check your Internet connection.  The diff will automatically reload when the connection is reestablished.");
+                window.setTimeout(function () {
+                    rcpatrol.loadChange(change);
+                }, 1000);
+            });
+            /*
             $("#rcpatroldiff").load(loadurl, function (response, status, xhr) {
                 if (status == "error") {
-                    $("#rcpatroldiff").fadeIn(1000);
-                    $("#rcpatroldiff").text("Could not load diff.  Please check your Internet connection.  The diff will automatically reload when the connection is reestablished.");
-                    window.setTimeout(function () {
-                        rcpatrol.loadChange(change);
-                    }, 1000);
                 } else {
                     $("#rcpatroldiff").find("form").hide();
                     $("#rcpatroldiff").find("#firstHeading").hide();
-                    $("#firstHeading, #section_0").html('Recent Changes Patrol \"<a target=\"_blank\" href=\"' + scriptpath + '/index.php?title=' + change.title + '\">' + change.title + "</a>\"");
-                    $("title").text("Recent Changes Patrol \"" + change.title + "\" - " + mw.config.get("wgSiteName"));
-
-                    $("#rcpatroldiff").fadeIn();
-                    $("#rcpatroladmintools").fadeIn();
-                    $("#rcpatrolpagetools").fadeIn();
-                    rcpatrol.rcpatrolbox.setValue("");
-                    rcpatrol.rcpatrolbutton.setLabel("Rollback");
-                    rcpatrol.setDisabled(false);
-                    $("#rcpatroladmintools").html('');
-                    $("#rcpatroladmintools").append('<a target="_blank" href="' + scriptpath + '/index.php?title=' + change.title + '&action=delete">Delete</a>');
-                    $("#rcpatroladmintools").append(' &bull; ');
-                    $("#rcpatroladmintools").append('<a target="_blank" href="' + scriptpath + '/index.php?title=' + change.title + '&action=protect">Protect</a>');
-                    $("#rcpatroladmintools").append(' &bull; ');
-                    $("#rcpatroladmintools").append('<a target="_blank" href="' + scriptpath + '/index.php?title=Special:Block/' + change.user + '">Block poster</a>');
-                    $("#rcpatrolpagetools").html('');
-                    $("#rcpatrolpagetools").append('<a target="_blank" href="' + scriptpath + '/index.php?title=' + change.title + '&action=history">View page history</a>');
-                    $("#rcpatrolpagetools").append(' &bull; ');
-                    $("#rcpatrolpagetools").append('<a target="_blank" href="' + scriptpath + '/index.php?oldid=' + oldid + '&diff=' + change.revid + '">View diff</a>');
                 }
             });
+            */
         }).fail(function (result) {
             $("#rcpatroldiff").fadeIn(1000);
             $("#rcpatroldiff").text("Could not load diff.  Please check your Internet connection.  The diff will automatically reload when the connection is reestablished.");

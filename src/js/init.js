@@ -22,6 +22,7 @@ if (!rcpatrol) { // stops multiple instances of RC patrol from running
             rcpatrol.fetch();
             $("#firstHeading, #section_0").html("Recent Changes Patrol");
             $("title").text("Recent Changes Patrol - " + mw.config.get("wgSiteName"));
+            /*
             if (mw.config.get("skin") == "minerva") {
                 $("body").html($("main").html());
                 $("#siteNotice").prepend('<a id="rcpatrolexit" href="/">Exit</a>');
@@ -29,6 +30,7 @@ if (!rcpatrol) { // stops multiple instances of RC patrol from running
                     window.history.back();
                 })
             }
+            */
             $("#mw-content-text").html("");
             $("#mw-content-text").append('<div id="rcpatrolbuttons"></div>');
             $("#mw-content-text").append('<div id="rcpatroldiff"></div>');
