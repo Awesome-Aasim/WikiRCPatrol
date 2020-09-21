@@ -1,5 +1,13 @@
 if (!rcpatrol) { // stops multiple instances of RC patrol from running
     //necessary resources
+    var rcpatrol = {};
+    if (mw.config.get("wgPageName").toLowerCase() == "Special:RecentChanges".toLowerCase()) {
+        rcpatrol = true;
+        $(document).ready(function () {
+            var rcpatrollocation = mw.config.get("wgArticlePath").replace("$1", "Special:BlankPage/RCPatrol")
+            $("#mw-content-text").prepend('<a href="' + rcpatrollocation + '">RC patrol</a> (<a href="' + rcpatrollocation + '?oresreview=1">ORES</a>)');
+        });
+    }
     if ((mw.config.get("wgPageName").toLowerCase() == "Special:BlankPage/RCPatrol".toLowerCase())) {
         /**
          * Initialize variables related to RC patrol
@@ -11,7 +19,6 @@ if (!rcpatrol) { // stops multiple instances of RC patrol from running
                 return url;
             })());
         }
-        var rcpatrol = {};
         rcpatrol.changes = [];
         rcpatrol.currentChange = 0;
         window.setInterval(() => {
@@ -54,10 +61,4 @@ if (!rcpatrol) { // stops multiple instances of RC patrol from running
             });
         })
     }
-}
-if (mw.config.get("wgPageName").toLowerCase() == "Special:RecentChanges".toLowerCase() && !rcpatrollocation) {
-    $(document).ready(function () {
-        var rcpatrollocation = mw.config.get("wgArticlePath").replace("$1", "Special:BlankPage/RCPatrol")
-        $("#mw-content-text").prepend('<a href="' + rcpatrollocation + '">RC patrol</a> (<a href="' + rcpatrollocation + '?oresreview=1">ORES</a>)');
-    });
 }
