@@ -46,10 +46,9 @@ if (!rcpatrol) { // stops multiple instances of RC patrol from running
             $("#rcpatrolbuttons").prepend(rcpatrol.dropdownmenu.$element);
             $("#rcpatrolbuttons").prepend('<a href="/wiki/Special:BlankPage/RCPatrol?oresreview=1">Only show edits that likely need review</a><br>');
             if (mw.config.get('wgUserGroups').includes('sysop')) {
-                $("#rcpatrolbuttons").append('Admin tools: <span id="rcpatroladmintools"></span>');
+                $("#rcpatrolbuttons").append('<div>Admin tools: <span id="rcpatroladmintools"></span></div>');
             }
-            $("#rcpatrolbuttons").append('<br/>');
-            $("#rcpatrolbuttons").append('Page tools: <span id="rcpatrolpagetools"></span>');
+            $("#rcpatrolbuttons").append('<div>Page tools: <span id="rcpatrolpagetools"></span></div>');
             $("#rcpatroldiff").css({
                 overflow: "auto"
             });
