@@ -4,7 +4,7 @@
  * @param {*} template the template prefix to use as a warning
  * @param {*} page the relevant page
  */
-rcpatrol.warn = function (user, template, page) {
+rcpatrol.warn = function (user, template, page, reason) {
     var date = new Date();
     var months = mw.config.get("wgMonthNames");
     var currentMonth = months[date.getUTCMonth() + 1];
@@ -107,7 +107,7 @@ rcpatrol.warn = function (user, template, page) {
                                 }
                                 if (revisions) {
                                     if (warninglevel > 4) {
-                                        rcpatrol.report(user);
+                                        rcpatrol.report(user, reason);
                                     } else {
                                         $.post(mw.config.get("wgScriptPath") + "/api.php", {
                                             "action": "edit",

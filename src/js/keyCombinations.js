@@ -28,7 +28,7 @@ $(document).keydown(function (e) {
                     if (option.keycode == e.which) {
                         rcpatrol.rcpatrolbox.setValue(option.summary);
                         rcpatrol.revert(rcpatrol.changes[rcpatrol.currentChange].title, rcpatrol.changes[rcpatrol.currentChange].user, function () {
-                            rcpatrol.warn(rcpatrol.changes[rcpatrol.currentChange].user, option.template, rcpatrol.changes[rcpatrol.currentChange].title);
+                            rcpatrol.warn(rcpatrol.changes[rcpatrol.currentChange].user, option.template, rcpatrol.changes[rcpatrol.currentChange].title, option.val);
                             rcpatrol.currentChange++;
                             rcpatrol.loadChange(rcpatrol.changes[rcpatrol.currentChange]);
                         }, function () {

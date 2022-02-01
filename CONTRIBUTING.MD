@@ -1,6 +1,7 @@
-## Setting up a development server
-* Make sure you have PHP installed
+## Contributions
+* Make sure you have Node installed
 * Clone the WikiRCPatrol project from GitHub with `git clone https://github.com/Awesome-Aasim/WikiRCPatrol.git`
-* Remove all release versions of the script from your common.js, and replace with or add `mw.loader.load('http://localhost:9696/build.php')`
-* In a terminal, ensure you are in the WikiRCPatrol directory and run `php -S localhost:9696` to start the devlopment server.
-* To build a final file to paste to Wikipedia, use `php build.php > WikiRCPatrol.js`
+* Run `npm update` to download all the packages
+* Run `build.js` file and copy its output
+* Open [Special:BlankPage/RCPatrol](https://en.wikipedia.org/wiki/Special:BlankPage/RCPatrol?safemode=1) and press F12 or Ctrl-Shift-I or Cmd-Option-I.
+* Paste the output into the dev console and run so you can test. **Be prepared to revert if something goes wrong!**

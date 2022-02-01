@@ -78,26 +78,29 @@ rcpatrol.loadChange = function (change) {
             $.get(loadurl, {
                 safemode: "1",
                 uselang: mw.config.get("wgUserLanguage"),
-                useskin: mw.config.get("skin"),
-                useskinversion: "2"
-            }).done(function(result) {
+                useskin: mw.config.get("skin")
+            }).done(function (result) {
                 var contenttextlocation;
                 switch (mw.config.get("skin")) {
                     case "timeless": contenttextlocation = '#mw-wrapper';
-                    break;
+                        break;
                     case "vector": contenttextlocation = "#content, .mw-page-container";
-                    break;
+                        break;
                     case "monobook": contenttextlocation = "#globalWrapper";
-                    break;
+                        break;
                     case "minerva": contenttextlocation = "#mw-mf-viewport"
-                    break;
+                        break;
                     case "modern": contenttextlocation = "#mw_main";
-                    break;
+                        break;
                 }
-                var $r = $(result);  
-                $("#rcpatroldiff").html($r);
-                $("#rcpatroldiff").find(contenttextlocation).html($("#rcpatroldiff").find("#mw-content-text").html());
-                
+                var $r;
+                $r = $(result);
+                $("#rcpatroldiff").html($r.find("#mw-content-text").html());
+                if (location.href.split(".").includes("m")) {
+                    mw.loader.load("mobile.special.mobileoptions.styles");
+                } else {
+                    mw.loader.load("mediawiki.diff.styles");
+                }
                 $("#firstHeading, #section_0").html('Recent Changes Patrol \"<a target=\"_blank\" href=\"' + scriptpath + '/index.php?title=' + change.title + '\">' + change.title + "</a>\"");
                 $("title").text("Recent Changes Patrol \"" + change.title + "\" - " + mw.config.get("wgSiteName"));
 
@@ -117,7 +120,7 @@ rcpatrol.loadChange = function (change) {
                 $("#rcpatrolpagetools").append('<a target="_blank" href="' + scriptpath + '/index.php?title=' + change.title + '&action=history">View page history</a>');
                 $("#rcpatrolpagetools").append(' &bull; ');
                 $("#rcpatrolpagetools").append('<a target="_blank" href="' + scriptpath + '/index.php?oldid=' + oldid + '&diff=' + change.revid + '">View diff</a>');
-            }).fail(function() {
+            }).fail(function () {
                 $("#rcpatroldiff").fadeIn(1000);
                 $("#rcpatroldiff").text("Could not load diff.  Please check your Internet connection.  The diff will automatically reload when the connection is reestablished.");
                 window.setTimeout(function () {
