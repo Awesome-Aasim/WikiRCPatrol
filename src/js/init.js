@@ -48,6 +48,7 @@ if (!rcpatrol) { // stops multiple instances of RC patrol from running
             if (mw.config.get('wgUserGroups').includes('sysop')) {
                 $("#rcpatrolbuttons").append('Admin tools: <span id="rcpatroladmintools"></span>');
             }
+            $("#rcpatrolbuttons").append('<br/>');
             $("#rcpatrolbuttons").append('Page tools: <span id="rcpatrolpagetools"></span>');
             $("#rcpatroldiff").css({
                 overflow: "auto"
