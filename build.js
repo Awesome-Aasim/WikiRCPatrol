@@ -17,7 +17,7 @@ let files = [
 function getCredits() {
     return `* MIT Licensed - see https://github.com/Awesome-Aasim/WikiRCPatrol/blob/master/LICENSE
 * 
-* Copyright (c) 2020 Awesome Aasim and contributors
+* Copyright (c) 2020-22 Awesome Aasim and contributors
 * 
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
