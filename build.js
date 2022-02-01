@@ -48,7 +48,8 @@ var os = "";
 os += "/*";
 os += getCredits() + "\n";
 os += getNotice() + "\n";
-os += "*/";
+os += "*/\n";
+os += "mw.loader.using(['oojs-ui-core', 'oojs-ui.styles.icons-editing-core', 'oojs-ui.styles.icons-movement', 'oojs-ui.styles.icons-interactions', 'oojs-ui.styles.icons-layout', 'oojs-ui.styles.icons-alerts'], function () {\n";
 function buildAllFiles(files, i, callback) {
     if (i == files.length) callback();
     else {
@@ -63,6 +64,7 @@ function buildAllFiles(files, i, callback) {
 }
 
 buildAllFiles(files, 0, function() {
+    os += "})";
     console.log(os);
     fs.writeFile("rcpatrol.js", os, function(err, data) {
         if (err) console.error(err);
