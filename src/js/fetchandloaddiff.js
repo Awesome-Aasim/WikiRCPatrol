@@ -72,7 +72,7 @@ rcpatrol.loadChange = function (change) {
             console.log(mw.config.get("wgScriptPath") + "/index.php?oldid=" + oldid + "&diff=" + change.revid);
             var scriptpath = mw.config.get('wgScriptPath');
             var loadurl = mw.config.get("wgScriptPath") + "/index.php?oldid=" + oldid + (change.revid ? "&diff=" + change.revid : "");
-            if (location.href.split(".").includes("m")) {
+            if (mw.config.get("wgMFMode")) {
                 loadurl = mw.config.get("wgArticlePath").replace("$1", "Special:MobileDiff/" + oldid + (change.revid ? "..." + change.revid : ""));
             }
             $.get(loadurl, {
@@ -80,24 +80,11 @@ rcpatrol.loadChange = function (change) {
                 uselang: mw.config.get("wgUserLanguage"),
                 useskin: mw.config.get("skin")
             }).done(function (result) {
-                var contenttextlocation;
-                switch (mw.config.get("skin")) {
-                    case "timeless": contenttextlocation = '#mw-wrapper';
-                        break;
-                    case "vector": contenttextlocation = "#content, .mw-page-container";
-                        break;
-                    case "monobook": contenttextlocation = "#globalWrapper";
-                        break;
-                    case "minerva": contenttextlocation = "#mw-mf-viewport"
-                        break;
-                    case "modern": contenttextlocation = "#mw_main";
-                        break;
-                }
                 var $r;
                 $r = $(result);
                 $("#rcpatroldiff").html($r.find("#mw-content-text").html());
-                if (location.href.split(".").includes("m")) {
-                    mw.loader.load("mobile.special.mobileoptions.styles");
+                if (mw.config.get("wgMFMode")) {
+                    mw.loader.load("mobile.special.mobilediff.styles");
                 } else {
                     mw.loader.load("mediawiki.diff.styles");
                 }
