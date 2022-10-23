@@ -1,6 +1,7 @@
-if (!rcpatrol) { // stops multiple instances of RC patrol from running
+if (!window.rcpatrol) { // stops multiple instances of RC patrol from running
     //necessary resources
     var rcpatrol = {};
+    window.rcpatrol = rcpatrol;
     if (mw.config.get("wgPageName").toLowerCase() == "Special:RecentChanges".toLowerCase()) {
         rcpatrol = true;
         $(document).ready(function () {
