@@ -16,11 +16,16 @@ rcpatrol.fetch = function () {
             "rctype": "edit|new",
             "uselang": mw.config.get("wgUserLanguage")
         }).done(function (result) {
-            rcpatrol.changes = result.query.recentchanges;
-            console.log(result.query.recentchanges);
-            rcpatrol.setDisabled(false);
-            rcpatrol.currentChange = 0;
-            rcpatrol.loadChange(rcpatrol.changes[rcpatrol.currentChange]);
+            if (result.error) {
+                console.error(result.error.info);
+                window.setTimeout(rcpatrol.fetch, 1000);
+            } else {
+                rcpatrol.changes = result.query.recentchanges;
+                console.log(result.query.recentchanges);
+                rcpatrol.setDisabled(false);
+                rcpatrol.currentChange = 0;
+                rcpatrol.loadChange(rcpatrol.changes[rcpatrol.currentChange]);
+            }
         }).fail(function () {
             window.setTimeout(rcpatrol.fetch, 1000);
         });
