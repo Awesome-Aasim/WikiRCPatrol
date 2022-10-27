@@ -1,6 +1,7 @@
 /**
  * Fetches a list of recent changes and loads it onto RC patrol
  */
+rcpatrol.timeoutDuration = 1000;
 rcpatrol.fetch = function () {
     if (!rcpatrol.fetchbutton.isDisabled()) {
         $("#rcpatroldiff").fadeOut();
@@ -17,9 +18,11 @@ rcpatrol.fetch = function () {
             "uselang": mw.config.get("wgUserLanguage")
         }).done(function (result) {
             if (result.error) {
+                rcpatrol.timeoutDuration *= 2
+                window.setTimeout(rcpatrol.fetch, rcpatrol.timeoutDuration / 2);
                 console.error(result.error.info);
-                window.setTimeout(rcpatrol.fetch, 1000);
             } else {
+                rcpatrol.timeoutDuration = 1000
                 rcpatrol.changes = result.query.recentchanges;
                 console.log(result.query.recentchanges);
                 rcpatrol.setDisabled(false);
@@ -27,6 +30,7 @@ rcpatrol.fetch = function () {
                 rcpatrol.loadChange(rcpatrol.changes[rcpatrol.currentChange]);
             }
         }).fail(function () {
+            rcpatrol.timeoutDuration *= 2
             window.setTimeout(rcpatrol.fetch, 1000);
         });
     }
