@@ -44,6 +44,12 @@ rcpatrol.thankbutton = new OO.ui.ButtonWidget({
     icon: "heart",
     align: 'inline'
 });
+rcpatrol.patrolbutton = new OO.ui.ButtonWidget({
+        autosize: true,
+        label: 'Mark as patrolled',
+        icon: 'check',
+        align: 'inline'
+    });
 rcpatrol.dropdownmenu = new OO.ui.DropdownWidget({
     label: "Rollback and warn...",
     icon: "speechBubbleAdd",
@@ -55,10 +61,12 @@ rcpatrol.rcpatrolbar.addItems([
     rcpatrol.previouseditbutton,
     rcpatrol.nexteditbutton,
     rcpatrol.fetchbutton,
-    rcpatrol.thankbutton
+    rcpatrol.thankbutton,
+    rcpatrol.patrolbutton
 ]);
 rcpatrol.rcpatrolbutton.$element.attr("title", "Revert this user's edits [ctrl-alt R]");
 rcpatrol.thankbutton.$element.attr("title", "Thank this user for their edits [ctrl-alt =]");
+rcpatrol.patrolbutton.$element.attr("title", "Mark this edi as patrolled");
 rcpatrol.nexteditbutton.$element.attr("title", "Load the next edit in the batch [ctrl-alt space]");
 rcpatrol.previouseditbutton.$element.attr("title", "Load the previous edit in the batch [ctrl-alt ,]");
 for (var i in rcpatrol.dropdown) {
@@ -81,5 +89,7 @@ rcpatrol.setDisabled = function (bool) {
     rcpatrol.rcpatrolbutton.setDisabled(bool);
     rcpatrol.rcpatrolbox.setDisabled(bool);
     rcpatrol.thankbutton.setDisabled(bool);
+    rcpatrol.patrolbutton.setDisabled(bool);
+    rcpatrol.patrolbutton.setLabel("Mark as patrolled");
     rcpatrol.fetchbutton.setDisabled(bool);
 };
